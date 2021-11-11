@@ -8,6 +8,7 @@ from core.views import home
 
 urlpatterns = [
     url(r'^', include('core.urls')),
+    url(r'^conta/', include('accounts.urls')),
     url(r'^cursos/', include('courses.urls')),
     path('admin/', admin.site.urls),
 ]
