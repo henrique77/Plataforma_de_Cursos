@@ -143,6 +143,6 @@ EMAIL_PORT = 587
 CONTACT_EMAIL = 'rikecaires@hotmail.com'
 
 # Auth
-LOGIN_URL = 'accounts:login'
+LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
-LOUGUT_URL = 'accounts:logout'
+LOUGUT_URL = 'logout'
