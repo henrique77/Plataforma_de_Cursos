@@ -4,13 +4,14 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth.views import LoginView, logout_then_login
 
-from accounts.views import register
+from accounts.views import register, dashboard
 
 import accounts.views
 import core
 from core.views import home, contact
 
 urlpatterns = [
+    url(r'^$', dashboard, name='dashboard'),
     path('entrar/', LoginView.as_view(template_name='accounts/login.html'), name='login'),
     #path('sair/', LoginView.as_view(next_page='/'), name='logout'),
     path('sair/', logout_then_login, {'login_url': '/'}, name='logout'),
