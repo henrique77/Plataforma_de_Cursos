@@ -11,12 +11,16 @@
 </head>
 <body>
     <div class="header">
-        <div class="pure-menu pure-menu-open pure-menu-fixed pure-menu-horizontal">
+        <div class="home-menu pure-menu pure-menu-open pure-menu-horizontal pure-menu-fixed">
             <a class="pure-menu-heading" href="{% url 'home' %}">SIMPLE MOOC</a>
             <ul>
                 <li class="pure-menu-selected"><a href="{% url 'home' %}">Início</a></li>
                 <li><a href="{% url 'index' %}">Cursos</a></li>
-                 <li><a href="{% url 'login' %}">Entrar</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}">Sair</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Entrar</a></li>
+                {% endif %}
                 <li><a href="{% url 'contact' %}">Contato</a></li>
             </ul>
         </div>
