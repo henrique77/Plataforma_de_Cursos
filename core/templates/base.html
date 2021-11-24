@@ -27,6 +27,15 @@
         </div>
     </div>
     <div class="content">
+        {% if messages %}
+        <div class="pure-g-r content-ribbon">
+                <aside class="pure-u-1">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+            </aside>
+        </div>
+        {% endif %}
         {% block content %}{% endblock %}
         <div class="footer">
             Simple MOOC - Uma simples plataforma de ensino a distância
