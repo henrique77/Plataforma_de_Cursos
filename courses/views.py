@@ -52,3 +52,12 @@ def enrollment(request, slug):
         messages.info(request, 'Você já está inscrito no curso')
 
     return redirect('dashboard')
+
+@login_required
+def announcements(request, slug):
+    course = get_object_or_404(Course, slug=slug)
+    enrollment = get_object_or_404(
+        Enrollment, user=request.user, course=course
+    )
+    if not enrollment.is_approved():
+        messages.error(request, 'A sua inscrição esta pendente')

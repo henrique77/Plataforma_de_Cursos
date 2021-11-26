@@ -15,24 +15,57 @@
     <div class="pure-u-1-3">
         <div class="pure-menu pure-menu-open">
             <ul>
+                <li class="pure-menu-heading">
+                    Bem-vindo, {{ user }}
+                </li>
                 {% load_my_courses user as enrollments %}
-                <li class="pure-menu-heading">Meus Cursos</li>
+                <li class="pure-menu-heading">Cursos</li>
                 {% for enrollment in enrollments %}
-                <li><a href="#">{{ enrollment.course }}</a></li>
+                <li>
+                    <a href="#">
+                        <i class="icon-book"></i>
+                        {{ enrollment.course }}
+                    </a>
+                </li>
                 {% empty %}
                 <li>Nenhum curso encontrado</li>
                 {% endfor %}
-                <li class="pure-menu-heading">Minha Conta</li>
-                <li><a href="{% url 'edit' %}">Editar Conta</a></li>
-                <li><a href="{% url 'edit_password' %}">Editar Senha</a></li>
+                <li class="pure-menu-heading">Configurações de Conta</li>
+                <li>
+                    <a href="{% url 'edit' %}">
+                        <i class="icon-cog"></i>
+                        Editar Informações
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'edit_password' %}">
+                        <i class="icon-lock"></i>
+                        Editar Senha
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
     <div class="pure-u-2-3">
         <div class="inner">
             {% block dashboard_content %}
-            <p><strong>Usuário</strong>: {{ user }}</p>
-            <p><strong>E-mail</strong>: {{ user.email }}</p>
+            <h2> Meus Cursos</h2>
+            {% for enrollment in enrollments %}
+            <div class="well">
+                <h3>{{ enrollment.course }}
+                    ({{ enrollment.course.start_date|date:'d/m/Y'|default:'Sem data' }})
+                </h3>
+                {{ enrollment.course.description|linebreaks }}
+                <div class="pure-controls">
+                    <a href="#" class="pure-button pure-button-primary">Acessar</a>
+                    <a href="#" class="pure-button pure-button-error">Cancelar</a>
+                </div>
+            </div>
+            {% empty %}
+            <aside class="pure-u-1">
+                <p>Nenhum curso inscrito</p>
+            </aside>
+            {% endfor %}
             {% endblock %}
         </div>
     </div>
