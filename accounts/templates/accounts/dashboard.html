@@ -3,6 +3,7 @@
 {% load courses_tags %}
 
 {% block content %}
+{% load_my_courses user as enrollments %}
 <div class="pure-g-r content-ribbon">
 
     <div class="pure-u-1">
@@ -18,31 +19,33 @@
                 <li class="pure-menu-heading">
                     Bem-vindo, {{ user }}
                 </li>
-                {% load_my_courses user as enrollments %}
+                {% block menu_options %}
+
                 <li class="pure-menu-heading">Cursos</li>
                 {% for enrollment in enrollments %}
                 <li>
-                    <a href="#">
-                        <i class="icon-book"></i>
+                    <a href="{% url 'announcements' enrollment.course.slug %}">
+                        <i class="fa fa-book"></i>
                         {{ enrollment.course }}
                     </a>
                 </li>
                 {% empty %}
-                <li>Nenhum curso encontrado</li>
+                    <li>Nenhum curso encontrado</li>
                 {% endfor %}
                 <li class="pure-menu-heading">Configurações de Conta</li>
                 <li>
                     <a href="{% url 'edit' %}">
-                        <i class="icon-cog"></i>
+                        <i class="fa fa-cog"></i>
                         Editar Informações
                     </a>
                 </li>
                 <li>
                     <a href="{% url 'edit_password' %}">
-                        <i class="icon-lock"></i>
+                        <i class="fa fa-lock"></i>
                         Editar Senha
                     </a>
                 </li>
+                {% endblock %}
             </ul>
         </div>
     </div>
@@ -57,8 +60,8 @@
                 </h3>
                 {{ enrollment.course.description|linebreaks }}
                 <div class="pure-controls">
-                    <a href="#" class="pure-button pure-button-primary">Acessar</a>
-                    <a href="#" class="pure-button pure-button-error">Cancelar</a>
+                    <a href="{% url 'announcements' enrollment.course.slug %}" class="pure-button pure-button-primary">Acessar</a>
+                    <a href="#" class="pure-button button-error">Cancelar</a>
                 </div>
             </div>
             {% empty %}
